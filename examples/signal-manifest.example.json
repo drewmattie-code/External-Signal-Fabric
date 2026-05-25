@@ -1,0 +1,161 @@
+{
+  "_comment": "Example ESF signal manifests. Each one is a typed signal with full provenance + freshness metadata. The shape is fixed; the payload varies by signal_class.",
+
+  "examples": [
+    {
+      "_description": "Realtime tier: commodity price tick. Half-life 60s — markets move continuously.",
+      "signal_id": "cme.copper.hg.2026-05-25T18:43:12.041Z.b3f1a2",
+      "signal_class": "commodity_price_tick",
+      "source_id": "cme-direct-feed",
+      "ingested_at": "2026-05-25T18:43:12.041Z",
+      "confidence": "high",
+      "confidence_band": 0.99,
+      "half_life_seconds": 60,
+      "latency_tier": "realtime",
+      "freshness_state": "live",
+      "payload": {
+        "symbol": "HG",
+        "exchange": "CME",
+        "settle_usd_per_lb": 4.182,
+        "tick_type": "trade",
+        "volume": 12
+      },
+      "provenance": {
+        "adapter_version": "v3.2.1",
+        "schema_version": "commodity_price_tick@v2",
+        "upstream_revision": "cme:2026-05-25T18:43:12Z"
+      }
+    },
+
+    {
+      "_description": "Near-realtime tier: port congestion. Half-life 4h — dwell changes over hours.",
+      "signal_id": "port.lgb.dwell.2026-05-25T18:30:00Z.a7d2c4",
+      "signal_class": "port_congestion",
+      "source_id": "port-tracker-pro",
+      "ingested_at": "2026-05-25T18:30:00Z",
+      "confidence": "medium",
+      "confidence_band": 0.85,
+      "half_life_seconds": 14400,
+      "latency_tier": "near-realtime",
+      "freshness_state": "live",
+      "payload": {
+        "port_id": "LGB",
+        "port_name": "Long Beach",
+        "dwell_hours_p50": 8.2,
+        "dwell_hours_p95": 14.7,
+        "berth_utilization_pct": 87,
+        "observation_window_hours": 24
+      },
+      "provenance": {
+        "adapter_version": "v1.5.0",
+        "schema_version": "port_congestion@v1",
+        "upstream_revision": "port-tracker-pro:rev-918342"
+      }
+    },
+
+    {
+      "_description": "Batch tier: supplier financial health. Half-life 30d — D&B updates monthly-ish.",
+      "signal_id": "dnb.supplier.acme-corp.2026-05-15T12:00:00Z.x9k1m2",
+      "signal_class": "supplier_financial_health",
+      "source_id": "dnb-direct-api",
+      "ingested_at": "2026-05-15T12:00:00Z",
+      "confidence": "high",
+      "confidence_band": 0.92,
+      "half_life_seconds": 2592000,
+      "latency_tier": "batch",
+      "freshness_state": "live",
+      "payload": {
+        "supplier_duns": "012345678",
+        "supplier_name": "Acme Corp",
+        "paydex_score": 62,
+        "paydex_delta_30d": -8,
+        "failure_score_class": "moderate-high",
+        "credit_recommendation_usd": 250000,
+        "viability_rating": "B"
+      },
+      "provenance": {
+        "adapter_version": "v2.0.0",
+        "schema_version": "supplier_financial_health@v1",
+        "upstream_revision": "dnb:report-2026-05-15"
+      }
+    },
+
+    {
+      "_description": "Near-realtime tier: geopolitical advisory. Half-life 7d — news-cycle decay.",
+      "signal_id": "geopol.red-sea.transit.2026-05-25T15:00:00Z.q8t4w6",
+      "signal_class": "geopolitical_advisory",
+      "source_id": "structured-news-api",
+      "ingested_at": "2026-05-25T15:00:00Z",
+      "confidence": "high",
+      "confidence_band": 0.94,
+      "half_life_seconds": 604800,
+      "latency_tier": "near-realtime",
+      "freshness_state": "live",
+      "payload": {
+        "region": "RED_SEA",
+        "advisory_type": "transit_advisory",
+        "severity": "elevated",
+        "affected_lanes": ["Suez", "Bab-el-Mandeb"],
+        "estimated_duration_days_p50": 14,
+        "primary_concern": "security_incidents",
+        "issuing_authority": "USCG_MARSEC"
+      },
+      "provenance": {
+        "adapter_version": "v1.2.3",
+        "schema_version": "geopolitical_advisory@v1",
+        "upstream_revision": "structured-news-api:event-id-7842913"
+      }
+    },
+
+    {
+      "_description": "STALE example: a port_congestion signal past its half-life but within 2x. Still readable, surface staleness.",
+      "signal_id": "port.oak.dwell.2026-05-25T12:00:00Z.k2j8l3",
+      "signal_class": "port_congestion",
+      "source_id": "port-tracker-pro",
+      "ingested_at": "2026-05-25T12:00:00Z",
+      "confidence": "medium",
+      "confidence_band": 0.85,
+      "half_life_seconds": 14400,
+      "latency_tier": "near-realtime",
+      "freshness_state": "stale",
+      "_note": "Now 6.5 hours after ingestion; past half_life (4h) but within 2x (8h). Consumer may use with caveat.",
+      "payload": {
+        "port_id": "OAK",
+        "port_name": "Oakland",
+        "dwell_hours_p50": 5.1,
+        "dwell_hours_p95": 9.3,
+        "berth_utilization_pct": 71,
+        "observation_window_hours": 24
+      },
+      "provenance": {
+        "adapter_version": "v1.5.0",
+        "schema_version": "port_congestion@v1",
+        "upstream_revision": "port-tracker-pro:rev-918301"
+      }
+    },
+
+    {
+      "_description": "EXPIRED example: a supplier_financial_health signal past 2x half-life. MUST NOT back a commitment.",
+      "signal_id": "dnb.supplier.zenith-llc.2026-03-01T12:00:00Z.m4n9p7",
+      "signal_class": "supplier_financial_health",
+      "source_id": "dnb-direct-api",
+      "ingested_at": "2026-03-01T12:00:00Z",
+      "confidence": "high",
+      "confidence_band": 0.92,
+      "half_life_seconds": 2592000,
+      "latency_tier": "batch",
+      "freshness_state": "expired",
+      "_note": "Now 85 days after ingestion; past 2x half_life (60d). MUST NOT be used for commitments. Re-ingest required.",
+      "payload": {
+        "supplier_duns": "098765432",
+        "supplier_name": "Zenith LLC",
+        "paydex_score": 78
+      },
+      "provenance": {
+        "adapter_version": "v1.9.0",
+        "schema_version": "supplier_financial_health@v1",
+        "upstream_revision": "dnb:report-2026-03-01"
+      }
+    }
+  ]
+}

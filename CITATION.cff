@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+title: "External Signal Fabric: An architectural pattern for fusing external-world signals into a decision substrate for AI agents"
+message: "If you use this specification, please cite it as below."
+type: software
+authors:
+  - given-names: Drew
+    family-names: Mattie
+    affiliation: "SaaSquach AI Labs (a division of Charles & Roe Inc.)"
+repository-code: "https://github.com/drewmattie-code/External-Signal-Fabric"
+url: "https://github.com/drewmattie-code/External-Signal-Fabric"
+license:
+  - CC-BY-4.0
+  - MIT
+date-released: 2026-05-25
+version: "0.1-draft"
+abstract: >
+  ESF (External Signal Fabric) is an architectural pattern for the layer
+  that fuses customer-external state — markets, logistics, geopolitics,
+  supplier health, weather, commodity — with customer-internal state
+  surfaced by the Progressive Discovery Spine (PDS), producing a single
+  decision substrate that the Adversarial Coordination Spine (ACS) can
+  reason over. ESF is a peer to PDS, not subordinate; ACS pulls from
+  both. The pattern addresses four documented failure modes of naive
+  external-signal integration: signal pollution, stale-signal
+  commitments, provenance gaps, and the commodity trap (raw signals
+  without fusion produce no moat). The pattern is defined as ten
+  principles plus reference SLAs and a numbered build sequence.
+keywords:
+  - signal-fusion
+  - external-signals
+  - event-streaming
+  - data-fabric
+  - ai-agents
+  - provenance
+  - freshness-contracts
+  - decision-substrate
+  - llm-architecture
