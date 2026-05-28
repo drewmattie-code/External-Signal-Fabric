@@ -6,7 +6,7 @@
 
 [![License: CC BY 4.0](https://img.shields.io/badge/spec-CC_BY_4.0-blue?style=flat-square)](LICENSE-CC-BY-4.0)
 [![License: MIT](https://img.shields.io/badge/code-MIT-green?style=flat-square)](LICENSE-MIT)
-[![Status: v0.1-draft](https://img.shields.io/badge/status-v0.1--draft-F59E0B?style=flat-square)](SPEC.md)
+[![Status: v1.0](https://img.shields.io/badge/status-v1.0-0F766E?style=flat-square)](SPEC.md)
 [![Peer: PDS](https://img.shields.io/badge/peer-PDS-0F766E?style=flat-square)](https://github.com/drewmattie-code/Progressive-Discovery-Spine)
 [![Above: ACS](https://img.shields.io/badge/below-ACS-7C3AED?style=flat-square)](https://github.com/drewmattie-code/Adversarial-Coordination-Spine)
 

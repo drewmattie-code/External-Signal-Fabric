@@ -1,6 +1,6 @@
 # External Signal Fabric — Specification
 
-> **Status:** v0.1-draft · Drew Mattie · 2026-05-25
+> **Status:** v1.0 · Drew Mattie · 2026-05-28
 > **License:** [CC BY 4.0](LICENSE-CC-BY-4.0)
 
 This is the full technical specification for the External Signal Fabric pattern. The [README](README.md) is the elevator pitch; this document is the build reference.
@@ -387,7 +387,8 @@ This dictionary is what the three-spec catalog enables and what no single spec p
 
 This specification follows semantic versioning. Breaking changes to the conceptual model bump the major version; new principles or refinements bump the minor. Editorial fixes bump the patch.
 
-- **v0.1-draft** — initial draft (2026-05-25). Awaiting field feedback before v1.0 lock.
+- **v0.1-draft** — initial draft (2026-05-25). Internal review.
+- **v1.0** — first public release under CC BY 4.0 + MIT (2026-05-28).
 
 ---
 

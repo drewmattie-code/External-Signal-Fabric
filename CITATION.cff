@@ -11,8 +11,8 @@ url: "https://github.com/drewmattie-code/External-Signal-Fabric"
 license:
   - CC-BY-4.0
   - MIT
-date-released: 2026-05-25
-version: "0.1-draft"
+date-released: 2026-05-28
+version: "1.0"
 abstract: >
   ESF (External Signal Fabric) is an architectural pattern for the layer
   that fuses customer-external state — markets, logistics, geopolitics,
