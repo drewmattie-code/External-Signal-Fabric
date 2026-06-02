@@ -1,10 +1,10 @@
 # Example: Bidirectional fusion protocols
 
-This shows ESF principle #6 (bidirectional fusion triggers) end-to-end. Two patterns, both producing the same artifact shape — a fused decision object that ACS consumes.
+This shows ESF principle #6 (bidirectional fusion triggers) end-to-end. Two patterns, both producing the same artifact shape: a fused decision object that ACS consumes.
 
 ---
 
-## Pattern A — PDS-anchored fusion
+## Pattern A: PDS-anchored fusion
 
 **Trigger.** PDS surfaces a customer fact. ESF enriches it with relevant external signals.
 
@@ -15,7 +15,7 @@ This shows ESF principle #6 (bidirectional fusion triggers) end-to-end. Two patt
 ```
 1. ACS planner: get_open_pos(customer=acme)
 2. PDS resolves: returns 47 open POs across 12 suppliers
-3. PDS detects: 12 distinct suppliers — fan out fusion request to ESF
+3. PDS detects: 12 distinct suppliers - fan out fusion request to ESF
 4. ESF receives: enrich_supplier_health(supplier_ids=[s1, s2, ..., s12])
 5. ESF resolves: for each supplier, pull latest supplier_financial_health signal
 6. ESF fuses: combines supplier_id + financial_health + the customer's
@@ -73,7 +73,7 @@ This shows ESF principle #6 (bidirectional fusion triggers) end-to-end. Two patt
 
 ---
 
-## Pattern B — ESF-anchored fusion
+## Pattern B: ESF-anchored fusion
 
 **Trigger.** ESF detects a meaningful external delta. PDS is queried for customer exposure.
 

@@ -3,7 +3,7 @@
 
   "examples": [
     {
-      "_description": "Realtime tier: commodity price tick. Half-life 60s — markets move continuously.",
+      "_description": "Realtime tier: commodity price tick. Half-life 60s: markets move continuously.",
       "signal_id": "cme.copper.hg.2026-05-25T18:43:12.041Z.b3f1a2",
       "signal_class": "commodity_price_tick",
       "source_id": "cme-direct-feed",
@@ -28,7 +28,7 @@
     },
 
     {
-      "_description": "Near-realtime tier: port congestion. Half-life 4h — dwell changes over hours.",
+      "_description": "Near-realtime tier: port congestion. Half-life 4h: dwell changes over hours.",
       "signal_id": "port.lgb.dwell.2026-05-25T18:30:00Z.a7d2c4",
       "signal_class": "port_congestion",
       "source_id": "port-tracker-pro",
@@ -54,7 +54,7 @@
     },
 
     {
-      "_description": "Batch tier: supplier financial health. Half-life 30d — D&B updates monthly-ish.",
+      "_description": "Batch tier: supplier financial health. Half-life 30d: D&B updates monthly-ish.",
       "signal_id": "dnb.supplier.acme-corp.2026-05-15T12:00:00Z.x9k1m2",
       "signal_class": "supplier_financial_health",
       "source_id": "dnb-direct-api",
@@ -81,7 +81,7 @@
     },
 
     {
-      "_description": "Near-realtime tier: geopolitical advisory. Half-life 7d — news-cycle decay.",
+      "_description": "Near-realtime tier: geopolitical advisory. Half-life 7d: news-cycle decay.",
       "signal_id": "geopol.red-sea.transit.2026-05-25T15:00:00Z.q8t4w6",
       "signal_class": "geopolitical_advisory",
       "source_id": "structured-news-api",

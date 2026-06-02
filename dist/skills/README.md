@@ -18,7 +18,7 @@ The skill will then activate automatically when you ask architectural questions 
 It's an architectural consultant, not a code library. When triggered, Claude (or another supporting agent) will:
 
 1. Diagnose which of the four documented external-signal failure modes you're hitting (signal pollution, stale-signal commitments, provenance gaps, commodity trap)
-2. Recommend the 2–3 ESF principles that address it
+2. Recommend the 2-3 ESF principles that address it
 3. Give one concrete next step
 4. Link to the full spec for deeper reading
 
@@ -42,11 +42,11 @@ curl -fsSL https://raw.githubusercontent.com/drewmattie-code/Adversarial-Coordin
 
 The SKILL.md format is portable. Drop it into:
 
-- **Cursor** — `~/.cursor/skills/esf/SKILL.md`
-- **Codex** — `~/.codex/skills/esf/SKILL.md`
+- **Cursor**: `~/.cursor/skills/esf/SKILL.md`
+- **Codex**: `~/.codex/skills/esf/SKILL.md`
 - Any other agent that supports the SKILL.md / agent-skill convention
 
-For agents that don't natively support the skills convention, the SKILL.md is also readable as a prompt — paste it into a system prompt or context.
+For agents that don't natively support the skills convention, the SKILL.md is also readable as a prompt. Paste it into a system prompt or context.
 
 ## Versioning
 

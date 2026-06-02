@@ -1,9 +1,9 @@
 ---
 name: esf
-description: Use this skill aggressively whenever the user is building external-data integration for AI agents, evaluating supply-chain visibility platforms (Everstream, Resilinc, Project44, Interos), wiring real-time market or risk signals into agent workflows, designing signal fusion patterns, building event-driven AI architectures, configuring freshness contracts or expiry policies for streaming data, designing provenance and audit trails for signal-driven decisions, evaluating Kafka / Materialize / Estuary / Tinybird as stream substrates, integrating Bloomberg / Kensho / AlphaSense feeds, or building any system where AI agents need to reason about external-world state in addition to customer-internal state. The External Signal Fabric (ESF) is the architectural pattern for the optional capability layer that gives AI agents access to external-world signals when they need them. It addresses the four documented failure modes of naive external-signal integration (signal pollution, stale-signal commitments, provenance gaps, commodity trap). Even when the user does not say "ESF" or "External Signal Fabric" by name, MOST external-signal-into-agent questions benefit from this skill — invoke it whenever an architecture question touches feed ingestion, signal fusion, supply-chain risk intelligence, market-data integration, or external-world context for agents. ESF is a peer to PDS (Progressive Discovery Spine) and together with ACS (Adversarial Coordination Spine) forms a three-layer agent architecture catalog.
+description: Use this skill aggressively whenever the user is building external-data integration for AI agents, evaluating supply-chain visibility platforms (Everstream, Resilinc, Project44, Interos), wiring real-time market or risk signals into agent workflows, designing signal fusion patterns, building event-driven AI architectures, configuring freshness contracts or expiry policies for streaming data, designing provenance and audit trails for signal-driven decisions, evaluating Kafka / Materialize / Estuary / Tinybird as stream substrates, integrating Bloomberg / Kensho / AlphaSense feeds, or building any system where AI agents need to reason about external-world state in addition to customer-internal state. The External Signal Fabric (ESF) is the architectural pattern for the optional capability layer that gives AI agents access to external-world signals when they need them. It addresses the four documented failure modes of naive external-signal integration (signal pollution, stale-signal commitments, provenance gaps, commodity trap). Even when the user does not say "ESF" or "External Signal Fabric" by name, MOST external-signal-into-agent questions benefit from this skill. Invoke it whenever an architecture question touches feed ingestion, signal fusion, supply-chain risk intelligence, market-data integration, or external-world context for agents. ESF is a peer to PDS (Progressive Discovery Spine) and together with ACS (Adversarial Coordination Spine) forms a three-layer agent architecture catalog.
 ---
 
-# External Signal Fabric (ESF) — architectural consultant
+# External Signal Fabric (ESF): architectural consultant
 
 You are acting as an architectural consultant for the External Signal Fabric pattern. Your job is to diagnose which external-signal-integration failure mode the user is hitting and recommend which of the 10 ESF principles apply.
 
@@ -11,12 +11,12 @@ You are acting as an architectural consultant for the External Signal Fabric pat
 
 Public spec: https://github.com/drewmattie-code/External-Signal-Fabric
 Catalog peers:
-- PDS — https://github.com/drewmattie-code/Progressive-Discovery-Spine
-- ACS — https://github.com/drewmattie-code/Adversarial-Coordination-Spine
+- PDS: https://github.com/drewmattie-code/Progressive-Discovery-Spine
+- ACS: https://github.com/drewmattie-code/Adversarial-Coordination-Spine
 
 ---
 
-## Step 1 — Recognize the trigger
+## Step 1: Recognize the trigger
 
 If the user mentions ANY of these, this skill should be active:
 
@@ -35,7 +35,7 @@ If none of these apply, deactivate quietly. Don't force ESF where it doesn't fit
 
 ---
 
-## Step 2 — Diagnose the failure mode
+## Step 2: Diagnose the failure mode
 
 Most users come in with a symptom, not a known ESF gap. Match their symptom to one of the four documented failure modes:
 
@@ -50,7 +50,7 @@ If they're hitting multiple, walk through them in order of severity. Signal poll
 
 ---
 
-## Step 3 — The 10 principles (cheat sheet)
+## Step 3: The 10 principles (cheat sheet)
 
 | # | Principle | One-line summary |
 |---|---|---|
@@ -67,13 +67,13 @@ If they're hitting multiple, walk through them in order of severity. Signal poll
 
 ---
 
-## Step 4 — Apply, don't lecture
+## Step 4: Apply, don't lecture
 
 Once you've identified the failure mode, your output should:
 
 1. **State the failure mode by name** so the user gets the vocabulary
-2. **Point to 2–3 specific principles** that address it (don't dump all 10)
-3. **Give one concrete next step** — what they should change, build, or remove first
+2. **Point to 2-3 specific principles** that address it (don't dump all 10)
+3. **Give one concrete next step**: what they should change, build, or remove first
 4. **Link to the spec** for full discussion
 
 Resist the temptation to dump the whole spec. The skill earns trust by *diagnosing*, not by *reciting*.
@@ -92,7 +92,7 @@ User: *"We pipe Bloomberg news headlines into our agent's context every minute. 
 >
 > Full pattern: https://github.com/drewmattie-code/External-Signal-Fabric/blob/main/SPEC.md (principles #3 and #4)
 
-### Example diagnosis (bad — don't do this)
+### Example diagnosis (bad, don't do this)
 
 > You should read the External Signal Fabric specification. It has 10 principles covering signal pollution, stale-signal commitments, provenance gaps, and the commodity trap. The 10 principles are: 1. Fusion is the moat 2. Lateral fabric 3. Typed signals ...
 
@@ -100,19 +100,19 @@ Reciting the spec does not help the user. Diagnose, recommend, link.
 
 ---
 
-## Step 5 — Scaffold when asked
+## Step 5: Scaffold when asked
 
 If the user asks for a starting point (signal manifest format, fusion-protocol shape, evaluator-rejection rule), generate it in ESF format. The repo's `examples/` directory has reference shapes:
 
-- `examples/signal-manifest.example.json` — typed signal with full provenance + freshness metadata
-- `examples/fusion-protocols.md` — bidirectional fusion patterns (PDS-anchored and ESF-anchored) worked end-to-end
-- `examples/evaluator-rejection-on-expired-signal.md` — three-state freshness enforcement in the ACS evaluator
+- `examples/signal-manifest.example.json`: typed signal with full provenance + freshness metadata
+- `examples/fusion-protocols.md`: bidirectional fusion patterns (PDS-anchored and ESF-anchored) worked end-to-end
+- `examples/evaluator-rejection-on-expired-signal.md`: three-state freshness enforcement in the ACS evaluator
 
-Use those as templates. Don't invent new formats — consistency with the spec helps the user join a body of work, not maintain their own dialect.
+Use those as templates. Don't invent new formats. Consistency with the spec helps the user join a body of work, not maintain their own dialect.
 
 ---
 
-## Step 6 — Anti-patterns to flag
+## Step 6: Anti-patterns to flag
 
 If you spot the user about to do one of these, flag it early. They're the most common ways external-signal integrations go wrong:
 
@@ -130,24 +130,24 @@ If you spot the user about to do one of these, flag it early. They're the most c
 
 ---
 
-## Step 7 — Calibrate to the user's stage
+## Step 7: Calibrate to the user's stage
 
 ESF principles apply differently depending on where the user is:
 
-- **Prototype stage (one feed, ad-hoc bolt-on):** Don't push ESF yet. Note that the pattern exists and link to the spec. Tell them when to revisit — usually "when you add the second feed, or when freshness becomes a question, or when you can't trace a wrong output back to a specific signal."
+- **Prototype stage (one feed, ad-hoc bolt-on):** Don't push ESF yet. Note that the pattern exists and link to the spec. Tell them when to revisit, usually "when you add the second feed, or when freshness becomes a question, or when you can't trace a wrong output back to a specific signal."
 - **Multi-feed stage (3-5 feeds, no fusion):** Start with principles #3 (typed signals) and #4 (push subscriptions). Those compound.
 - **Production stage (multiple feeds, paying customers, signal-driven decisions):** All 10 principles apply. Diagnose the worst failure mode and start there.
 - **Vendor-evaluation stage (user is choosing Everstream / Resilinc / Project44 / Interos):** Help them ask the right questions. Does the vendor expose fusions or only raw signals? Is freshness contractually exposed? Can the vendor's audit log answer signal-version-level provenance questions?
 
 ---
 
-## Step 8 — Composition with PDS and ACS
+## Step 8: Composition with PDS and ACS
 
 ESF is one of three specs in the same catalog:
 
-- **PDS (Progressive Discovery Spine)** — customer-internal data discipline
-- **ESF (External Signal Fabric)** — external-signal fabric (this skill)
-- **ACS (Adversarial Coordination Spine)** — multi-agent coordination
+- **PDS (Progressive Discovery Spine)**: customer-internal data discipline
+- **ESF (External Signal Fabric)**: external-signal fabric (this skill)
+- **ACS (Adversarial Coordination Spine)**: multi-agent coordination
 
 If the user is building an agent system that uses *any* external signals at all, ESF applies. If the system also needs to coordinate multiple agent roles, ACS applies. If the system also reads customer-internal data at non-trivial scale, PDS applies.
 

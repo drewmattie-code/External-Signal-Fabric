@@ -1,4 +1,4 @@
-# External Signal Fabric — Specification
+# External Signal Fabric: Specification
 
 > **Status:** v1.0 · Drew Mattie · 2026-05-28
 > **License:** [CC BY 4.0](LICENSE-CC-BY-4.0)
@@ -7,11 +7,11 @@ This is the full technical specification for the External Signal Fabric pattern.
 
 ---
 
-## 1. Context — what ESF solves
+## 1. Context: what ESF solves
 
-AI agents produce better decisions when they can reason about both the customer's internal state and the relevant external world. Most agent decisions are answerable from internal data alone — invoices, POs, schedules, inventory, contracts. Some are not: a decision about an open PO is materially improved if the agent knows the supplier's current financial health. A routing decision is improved if the agent knows current port dwell and weather. A commodity-exposure analysis is improved if the agent knows the current strip.
+AI agents produce better decisions when they can reason about both the customer's internal state and the relevant external world. Most agent decisions are answerable from internal data alone: invoices, POs, schedules, inventory, contracts. Some are not: a decision about an open PO is materially improved if the agent knows the supplier's current financial health. A routing decision is improved if the agent knows current port dwell and weather. A commodity-exposure analysis is improved if the agent knows the current strip.
 
-**ESF is the architectural pattern for the optional capability that gives AI agents access to external-world signals when the decision warrants it.** ESF is not mandatory — most decisions do not engage ESF. When engaged, ESF provides typed signals, fusions against customer-specific context, freshness contracts, and signal-version provenance.
+**ESF is the architectural pattern for the optional capability that gives AI agents access to external-world signals when the decision warrants it.** ESF is not mandatory. Most decisions do not engage ESF. When engaged, ESF provides typed signals, fusions against customer-specific context, freshness contracts, and signal-version provenance.
 
 Four failure modes recur when teams wire external-signal integration into agents naively:
 
@@ -20,7 +20,7 @@ Four failure modes recur when teams wire external-signal integration into agents
 3. **Provenance gaps.** When the agent produces an output that turns out to be wrong, post-mortem can't attribute the failure to a specific signal version.
 4. **Commodity trap.** Raw signal feeds are a commodity. Fusions against customer-specific PDS context are the moat. Systems that expose only raw signals build a category Everstream / Resilinc / Project44 / Interos already won.
 
-ESF is the implementation pattern that addresses all four — when teams choose to enable external-signal capabilities for their agents.
+ESF is the implementation pattern that addresses all four, when teams choose to enable external-signal capabilities for their agents.
 
 ---
 
@@ -74,7 +74,7 @@ Lateral, not sequential. Many feeds, many fusion workers, many consumers. No sin
 
 ## 3. The 10 principles
 
-### 3.1 — Fusion is the moat, raw signal is the commodity
+### 3.1: Fusion is the moat, raw signal is the commodity
 
 **Problem.** Anyone can buy a weather API, a commodity-price subscription, a supplier-health feed. Building a system that exposes only raw external signals to agents builds a category Everstream / Resilinc / Project44 / Interos already won. The product is undifferentiated.
 
@@ -85,25 +85,25 @@ Lateral, not sequential. Many feeds, many fusion workers, many consumers. No sin
 
 The Fusion contains the customer-specific reasoning. The raw signal does not.
 
-**Implementation.** Fusion workers are first-class entities in the fabric — separate from Adapters and separate from the Bus. Every Fusion is named, versioned, and has a stable input/output contract.
+**Implementation.** Fusion workers are first-class entities in the fabric, separate from Adapters and separate from the Bus. Every Fusion is named, versioned, and has a stable input/output contract.
 
 **Anti-pattern.** Exposing the typed event bus directly to agents without Fusions on top. Agents reason about raw signals, write their own ad-hoc reasoning code, and lose the fusion-as-moat advantage.
 
 ---
 
-### 3.2 — Lateral fabric, not sequential spine
+### 3.2: Lateral fabric, not sequential spine
 
 **Problem.** Spines have a single path: discover → cache → invoke (PDS) or plan → generate → evaluate (ACS). Trying to force external-signal integration into a spine topology creates artificial bottlenecks and rejects the multi-feed, multi-consumer reality.
 
-**Pattern.** ESF is a *fabric* — many feeds writing into a typed event bus, many fusion workers producing derived signals laterally, many consumers pulling cross-sections. The naming choice is deliberate: "Fabric" is not "Spine." Topology drives vocabulary.
+**Pattern.** ESF is a *fabric*: many feeds writing into a typed event bus, many fusion workers producing derived signals laterally, many consumers pulling cross-sections. The naming choice is deliberate: "Fabric" is not "Spine." Topology drives vocabulary.
 
-**Implementation.** Bus-shaped backbone (Kafka, Redis Streams, Pulsar). Fusion workers are stateless or selectively stateful, scaling horizontally. Subscriptions are independent — adding a new consumer requires no upstream change.
+**Implementation.** Bus-shaped backbone (Kafka, Redis Streams, Pulsar). Fusion workers are stateless or selectively stateful, scaling horizontally. Subscriptions are independent. Adding a new consumer requires no upstream change.
 
 **Anti-pattern.** Routing all feeds through a single "signal pipeline" that processes them sequentially. Lose parallelism, gain unnecessary coupling, fail to scale past a handful of feeds.
 
 ---
 
-### 3.3 — Typed signals with structured payloads
+### 3.3: Typed signals with structured payloads
 
 **Problem.** Unstructured feed text (news headlines, weather PDFs, free-form geopolitical advisories) reaching downstream consumers forces every consumer to redo the same parsing work. Errors multiply. Provenance is impossible.
 
@@ -115,7 +115,7 @@ The Fusion contains the customer-specific reasoning. The raw signal does not.
 | `signal_class` | Type (e.g., `port_congestion`, `commodity_price`, `supplier_financial_health`) |
 | `source_id` | Which adapter / provider produced it |
 | `ingested_at` | UTC timestamp of ingestion |
-| `confidence` | 0–1 or band (`high`/`medium`/`low`) |
+| `confidence` | 0-1 or band (`high`/`medium`/`low`) |
 | `half_life_seconds` | Per-class freshness window |
 | `payload` | Structured fields specific to the signal class |
 
@@ -127,19 +127,19 @@ Unstructured-to-structured conversion happens at the Adapter, never downstream.
 
 ---
 
-### 3.4 — Push subscriptions, not poll
+### 3.4: Push subscriptions, not poll
 
 **Problem.** Polling-based access requires consumers to know when to ask. Consumers either over-poll (wasted compute, latency penalty) or under-poll (missed deltas, stale decisions). Either way, the consumer's context window fills with poll responses unrelated to the current question.
 
 **Pattern.** Consumers subscribe to signal classes relevant to their current workstream. The fabric pushes deltas as they occur. ACS planners declare their subscriptions at session start; the fabric pushes only relevant signals into the planner's working state.
 
-**Implementation.** Consumer groups (Kafka), pub-sub channels (Redis Streams), or webhook delivery for distant consumers. Subscriptions are by `signal_class` (and optionally by filter predicates within the class — e.g., subscribe to `port_congestion` for `port_id IN (LGB, OAK, LAX)`).
+**Implementation.** Consumer groups (Kafka), pub-sub channels (Redis Streams), or webhook delivery for distant consumers. Subscriptions are by `signal_class` (and optionally by filter predicates within the class, e.g., subscribe to `port_congestion` for `port_id IN (LGB, OAK, LAX)`).
 
 **Anti-pattern.** Exposing a `get_current_signal_state()` synchronous query that consumers call in a loop. Couples consumer latency to the entire fabric and pollutes consumer context windows.
 
 ---
 
-### 3.5 — Three-state freshness contract
+### 3.5: Three-state freshness contract
 
 **Problem.** External signals have wildly different decision-relevance lifetimes. A port-congestion datapoint is meaningful for hours; a supplier financial-health datapoint is meaningful for weeks; a commodity price tick is meaningful for minutes. A consumer that doesn't know how fresh a signal is can't decide whether to act on it.
 
@@ -163,13 +163,13 @@ When a commitment depends on an ESF signal, the consumer MUST check the signal's
 | `geopolitical_advisory` | 7 days | News-cycle decay |
 | `weather_forecast_24h` | 6 hours | Forecast refresh cadence |
 
-Half-life tuning is empirical — adjust based on observed false-positive rate of commitments backed by stale signals.
+Half-life tuning is empirical. Adjust based on observed false-positive rate of commitments backed by stale signals.
 
 **Anti-pattern.** Treating all signals as "fresh forever" or all signals as "always-recheck." Both lose to per-class half-lives.
 
 ---
 
-### 3.6 — Bidirectional fusion triggers
+### 3.6: Bidirectional fusion triggers
 
 **Problem.** A single fusion-trigger pattern misses half the meaningful fusions. PDS-anchored fusion alone misses fusions that should fire when the world changes. ESF-anchored fusion alone misses fusions that should fire when a customer fact gets surfaced.
 
@@ -188,7 +188,7 @@ Both produce the same artifact shape: a fused decision object with the relevant 
 
 ---
 
-### 3.7 — Tiered latency budgets
+### 3.7: Tiered latency budgets
 
 **Problem.** Forcing all signals through the same latency budget either over-provisions (paying realtime cost for batch-tier signals) or under-provisions (forcing realtime-tier signals through hourly batch pipelines).
 
@@ -208,7 +208,7 @@ The bus and fusion-worker infrastructure are sized per-tier. Fusions that combin
 
 ---
 
-### 3.8 — Tenant-scoped fusion, shared raw signals
+### 3.8: Tenant-scoped fusion, shared raw signals
 
 **Problem.** Raw external signals are not customer-specific (port dwell at Long Beach is the same fact for every customer). Caching them per-tenant wastes 99% of cache capacity. But Fusions are customer-specific by definition (they depend on PDS context). Sharing them across tenants leaks tenant context.
 
@@ -228,7 +228,7 @@ This mirrors the PDS pattern (shared tool index, per-tenant result cache).
 
 ---
 
-### 3.9 — Per-fusion degradation declaration
+### 3.9: Per-fusion degradation declaration
 
 **Problem.** ESF is opt-in. A consumer (ACS planner) may proceed without an expected ESF signal for many decisions. But for some decisions, proceeding without the signal produces a structurally wrong answer. A global policy ("always use ESF" or "ESF is optional") doesn't capture this. The decision must be per-fusion.
 
@@ -248,9 +248,9 @@ This is the mechanism by which ESF is opt-in *safely*. The fabric does not asser
 
 ---
 
-### 3.10 — Signal-version provenance, not signal-class
+### 3.10: Signal-version provenance, not signal-class
 
-**Problem.** When an agent's output turns out to be wrong, post-mortem needs to attribute the failure to a specific cause. "We used port-congestion data" is not specific enough — *which* signal? At *what* timestamp? With *what* upstream source revision? Audit at the signal-class level cannot answer these.
+**Problem.** When an agent's output turns out to be wrong, post-mortem needs to attribute the failure to a specific cause. "We used port-congestion data" is not specific enough. *Which* signal? At *what* timestamp? With *what* upstream source revision? Audit at the signal-class level cannot answer these.
 
 **Pattern.** Every Fusion's output carries the specific signal version IDs that produced it. The ACS audit log records those IDs alongside the commitment. Post-mortem queries the provenance store by signal version ID and reconstructs the exact upstream state at decision time.
 
@@ -288,7 +288,7 @@ ESF is built in the following sequence from skeleton to first reference deployme
 |---|---|---|
 | 1 | Typed signal schema · one free-feed adapter (NOAA weather) · Redis Streams bus · basic provenance store | Skeleton with one source proves the typing + bus + provenance trio |
 | 2 | Second adapter from a different signal class (public commodity feed, e.g. CME settle prices) | Proves bus generality across signal classes |
-| 3 | First Fusion worker — PDS-anchored pattern (PDS fact → ESF enrichment) | Proves the moat primitive |
+| 3 | First Fusion worker: PDS-anchored pattern (PDS fact → ESF enrichment) | Proves the moat primitive |
 | 4 | Subscription layer · ACS planner subscribes to fusion class · end-to-end trace | Proves the consumer surface |
 | 5 | Three-state freshness contract enforced · evaluator rejection on expired blocking-fusion signals | Proves the freshness primitive at the commitment boundary |
 | 6 | First paid feed adapter (D&B supplier health or equivalent) · ESF-anchored fusion pattern (delta → PDS query) | Proves the bidirectional trigger pattern |
@@ -316,19 +316,19 @@ ESF is built in the following sequence from skeleton to first reference deployme
 
 ## 7. Compatibility with existing standards
 
-ESF is compatible with — and built on top of — these standards:
+ESF is compatible with, and built on top of, these standards:
 
-- **Apache Kafka / Confluent / Redpanda** — Typed-stream substrate at the bus layer
-- **CloudEvents (CNCF)** — Standard envelope for typed signals
-- **Apache Flink / Materialize / Estuary Flow / Tinybird** — Stream processors for fusion-worker implementations
-- **OpenLineage** — Data lineage at the signal-fabric scale
-- **W3C PROV** — Provenance vocabulary for signal-version attribution
-- **OpenTelemetry** — Distributed tracing across adapter → bus → fusion → consumer
+- **Apache Kafka / Confluent / Redpanda**: Typed-stream substrate at the bus layer
+- **CloudEvents (CNCF)**: Standard envelope for typed signals
+- **Apache Flink / Materialize / Estuary Flow / Tinybird**: Stream processors for fusion-worker implementations
+- **OpenLineage**: Data lineage at the signal-fabric scale
+- **W3C PROV**: Provenance vocabulary for signal-version attribution
+- **OpenTelemetry**: Distributed tracing across adapter → bus → fusion → consumer
 
 ESF is also compatible with the companion specifications in the catalog:
 
-- **PDS (Progressive Discovery Spine)** — ESF is a peer to PDS, not a substitute. PDS resolves customer-internal state; ESF resolves external-world state. Both feed ACS.
-- **ACS (Adversarial Coordination Spine)** — ACS consumes from ESF via subscriptions; the ACS evaluator enforces ESF's freshness and degradation contracts at the commitment boundary.
+- **PDS (Progressive Discovery Spine)**: ESF is a peer to PDS, not a substitute. PDS resolves customer-internal state; ESF resolves external-world state. Both feed ACS.
+- **ACS (Adversarial Coordination Spine)**: ACS consumes from ESF via subscriptions; the ACS evaluator enforces ESF's freshness and degradation contracts at the commitment boundary.
 
 ---
 
@@ -356,7 +356,7 @@ This dictionary is what the three-spec catalog enables and what no single spec p
 - CloudEvents (CNCF), *Spec home* ([cloudevents.io](https://cloudevents.io/))
 - Materialize, *Up-to-the-second context* ([materialize.com](https://materialize.com/))
 - Estuary Flow, *Right-time data platform* ([estuary.dev](https://estuary.dev/))
-- Tinybird, *Get started — concepts* ([tinybird.co](https://www.tinybird.co/docs/get-started/concepts))
+- Tinybird, *Get started: concepts* ([tinybird.co](https://www.tinybird.co/docs/get-started/concepts))
 
 ### Financial signal fusion
 
@@ -378,8 +378,8 @@ This dictionary is what the three-spec catalog enables and what no single spec p
 
 ### Catalog peers
 
-- Progressive Discovery Spine — [github.com/drewmattie-code/Progressive-Discovery-Spine](https://github.com/drewmattie-code/Progressive-Discovery-Spine)
-- Adversarial Coordination Spine — [github.com/drewmattie-code/Adversarial-Coordination-Spine](https://github.com/drewmattie-code/Adversarial-Coordination-Spine)
+- Progressive Discovery Spine: [github.com/drewmattie-code/Progressive-Discovery-Spine](https://github.com/drewmattie-code/Progressive-Discovery-Spine)
+- Adversarial Coordination Spine: [github.com/drewmattie-code/Adversarial-Coordination-Spine](https://github.com/drewmattie-code/Adversarial-Coordination-Spine)
 
 ---
 
@@ -387,8 +387,8 @@ This dictionary is what the three-spec catalog enables and what no single spec p
 
 This specification follows semantic versioning. Breaking changes to the conceptual model bump the major version; new principles or refinements bump the minor. Editorial fixes bump the patch.
 
-- **v0.1-draft** — initial draft (2026-05-25). Internal review.
-- **v1.0** — first public release under CC BY 4.0 + MIT (2026-05-28).
+- **v0.1-draft**: initial draft (2026-05-25). Internal review.
+- **v1.0**: first public release under CC BY 4.0 + MIT (2026-05-28).
 
 ---
 
@@ -396,4 +396,4 @@ This specification follows semantic versioning. Breaking changes to the conceptu
 
 [Drew Mattie](https://www.linkedin.com/in/drew-mattie-88084826/) · SaaSquach AI Labs (a division of Charles & Roe Inc.) · 2026
 
-ESF was developed at SaaSquach AI Labs (a division of Charles & Roe Inc.) as the third specification in the agent-architecture catalog alongside PDS and ACS. This specification is released as open documentation under [CC BY 4.0](LICENSE-CC-BY-4.0) so the pattern can be adopted, adapted, and built upon — with attribution.
+ESF was developed at SaaSquach AI Labs (a division of Charles & Roe Inc.) as the third specification in the agent-architecture catalog alongside PDS and ACS. This specification is released as open documentation under [CC BY 4.0](LICENSE-CC-BY-4.0) so the pattern can be adopted, adapted, and built upon, with attribution.

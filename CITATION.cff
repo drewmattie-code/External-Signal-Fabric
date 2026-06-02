@@ -15,8 +15,8 @@ date-released: 2026-05-28
 version: "1.0"
 abstract: >
   ESF (External Signal Fabric) is an architectural pattern for the layer
-  that fuses customer-external state — markets, logistics, geopolitics,
-  supplier health, weather, commodity — with customer-internal state
+  that fuses customer-external state, markets, logistics, geopolitics,
+  supplier health, weather, commodity, with customer-internal state
   surfaced by the Progressive Discovery Spine (PDS), producing a single
   decision substrate that the Adversarial Coordination Spine (ACS) can
   reason over. ESF is a peer to PDS, not subordinate; ACS pulls from

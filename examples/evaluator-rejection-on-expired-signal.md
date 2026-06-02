@@ -11,7 +11,7 @@ The scenario: an ACS Generator has produced a commitment ("re-route in-transit i
 **Generator's proposed commitment (in `workspace/commitment.md`):**
 
 ```markdown
-## Commitment — sprint-3: Re-route in-transit inventory
+## Commitment - sprint-3: Re-route in-transit inventory
 
 I will issue re-routing instructions for the 38 in-transit SKUs ($4.72M)
 currently routed through Red Sea lanes, redirecting them via Cape of Good
@@ -91,7 +91,7 @@ def evaluate_commitment(commitment, contract):
 ## Evaluator response (written to `workspace/critique-log.md`)
 
 ```markdown
-## Critique — sprint-3 commitment
+## Critique - sprint-3 commitment
 
 **Status:** REJECT
 
@@ -124,7 +124,7 @@ substantive. Refresh the signal, recheck the situation, then proceed.
 
 ## What the audit log records
 
-The Evaluator's reject — and its reason — are written to the immutable audit log with the specific signal version ID and fusion ID referenced:
+The Evaluator's reject, and its reason, are written to the immutable audit log with the specific signal version ID and fusion ID referenced:
 
 ```json
 {
