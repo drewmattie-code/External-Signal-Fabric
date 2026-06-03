@@ -333,7 +333,7 @@ ESF is also compatible with the companion specifications in the catalog (nine in
 - **AGS (Agent Governance Spine)** (public): deterministic governance, per-agent identity, and tamper-evident audit.
 - **DCS (Durable Context Spine)** (public): durable state and memory across sessions and time.
 - **GDS (Grounded Data Spine)** (private, forthcoming): a canonical semantic model (text-to-metric) plus data-level entitlements.
-- **ARS (Agent Registry Spine)** (private, forthcoming): the inventory substrate, one system of record for every agentic asset that discovery reads from and governance enforces against.
+- **ARS (Agent Registry Spine)** (private, forthcoming): the system of record layer for every agentic asset that discovery reads from and governance enforces against.
 - **SRS (Sovereign Runtime Spine)** (private, forthcoming): the execution substrate, the sovereign first-party agent runtime that first-party agents run on while outside agents and tools plug into the Spine.
 
 ---
@@ -396,7 +396,7 @@ This dictionary is what the full catalog enables and what no single spec produce
 - Durable Context Spine (public): [github.com/drewmattie-code/Durable-Context-Spine](https://github.com/drewmattie-code/Durable-Context-Spine)
 - Composite Risk Index (private, patent-preservation): composite, cross-layer risk scoring
 - Grounded Data Spine (private, forthcoming): a canonical semantic model (text-to-metric) plus data-level entitlements
-- Agent Registry Spine (private, forthcoming): the inventory substrate, one system of record for every agentic asset that discovery reads from and governance enforces against
+- Agent Registry Spine (private, forthcoming): the system of record layer for every agentic asset that discovery reads from and governance enforces against
 - Sovereign Runtime Spine (private, forthcoming): the execution substrate, the sovereign first-party agent runtime that first-party agents run on while outside agents and tools plug into the Spine
 
 ---

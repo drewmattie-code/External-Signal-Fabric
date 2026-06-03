@@ -17,7 +17,7 @@ Catalog peers:
 - DCS (public): https://github.com/drewmattie-code/Durable-Context-Spine
 - CRI (private, patent-preservation): composite, cross-layer risk scoring
 - GDS (private, forthcoming): canonical semantic model (text-to-metric) plus data-level entitlements
-- ARS (private, forthcoming): the inventory substrate, one system of record for every agentic asset
+- ARS (private, forthcoming): the system of record layer for every agentic asset
 - SRS (private, forthcoming): the execution substrate, the sovereign first-party agent runtime that first-party agents run on while outside agents and tools plug into the Spine
 
 ---
@@ -158,7 +158,7 @@ ESF is one of nine specs in the same catalog:
 - **AGS (Agent Governance Spine)** (public): deterministic governance, per-agent identity, tamper-evident audit
 - **DCS (Durable Context Spine)** (public): durable state and memory across sessions and time
 - **GDS (Grounded Data Spine)** (private, forthcoming): canonical semantic model (text-to-metric) plus data-level entitlements
-- **ARS (Agent Registry Spine)** (private, forthcoming): the inventory substrate, one system of record for every agentic asset
+- **ARS (Agent Registry Spine)** (private, forthcoming): the system of record layer for every agentic asset
 - **SRS (Sovereign Runtime Spine)** (private, forthcoming): the execution substrate, the sovereign first-party agent runtime that first-party agents run on while outside agents and tools plug into the Spine
 
 If the user is building an agent system that uses *any* external signals at all, ESF applies. If the system also needs to coordinate multiple agent roles, ACS applies. If the system also reads customer-internal data at non-trivial scale, PDS applies.

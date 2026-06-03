@@ -299,7 +299,7 @@ ESF is one of nine specifications in the same architectural catalog:
 - **[AGS: Agent Governance Spine](https://github.com/drewmattie-code/Agent-Governance-Spine)** (public): deterministic governance, per-agent identity, tamper-evident audit
 - **[DCS: Durable Context Spine](https://github.com/drewmattie-code/Durable-Context-Spine)** (public): durable state and memory across sessions and time
 - **GDS: Grounded Data Spine** (private, forthcoming): a canonical semantic model (text-to-metric) plus data-level entitlements
-- **ARS: Agent Registry Spine** (private, forthcoming): the inventory substrate, one system of record for every agentic asset that discovery reads from and governance enforces against
+- **ARS: Agent Registry Spine** (private, forthcoming): the system of record layer for every agentic asset that discovery reads from and governance enforces against
 - **SRS: Sovereign Runtime Spine** (private, forthcoming): the execution substrate, the sovereign first-party agent runtime that first-party agents run on while outside agents and tools plug into the Spine
 
 PDS and ESF are peers; ACS consumes from both. Together with the rest of the catalog they form the ten-way failure attribution dictionary documented above.
