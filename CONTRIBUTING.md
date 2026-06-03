@@ -59,7 +59,7 @@ If you think a principle is wrong, please say so directly in an issue. Include t
 
 ## Relationship to the catalog
 
-ESF is one of eight specifications in the same architectural catalog:
+ESF is one of nine specifications in the same architectural catalog:
 
 - **PDS (Progressive Discovery Spine)** (public): customer-internal tool / data discovery discipline
 - **ACS (Adversarial Coordination Spine)** (public): multi-agent coordination layer
@@ -69,6 +69,7 @@ ESF is one of eight specifications in the same architectural catalog:
 - **DCS (Durable Context Spine)** (public): durable state and memory across sessions and time
 - **GDS (Grounded Data Spine)** (private, forthcoming): a canonical semantic model (text-to-metric) plus data-level entitlements
 - **ARS (Agent Registry Spine)** (private, forthcoming): the inventory substrate, one system of record for every agentic asset that discovery reads from and governance enforces against
+- **SRS (Sovereign Runtime Spine)** (private, forthcoming): the execution substrate, the sovereign first-party agent runtime that first-party agents run on while outside agents and tools plug into the Spine
 
 ESF is a peer to PDS; both feed ACS. Cross-cutting contributions that touch two or more specs are welcome. Open an issue on the most-affected repo first.
 

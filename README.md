@@ -133,9 +133,9 @@ PDS answers *"what is true inside this customer's four walls?"* ESF answers *"wh
 
 Full discussion of each principle, with problems, patterns, and implementation notes, lives in [SPEC.md](SPEC.md).
 
-## The nine-way failure attribution principle
+## The ten-way failure attribution principle
 
-ESF sits in a catalog whose meta-architectural contribution is a complete failure-attribution dictionary. When something goes wrong in an agent-driven decision, post-mortem can attribute the failure cleanly to one of nine sources:
+ESF sits in a catalog whose meta-architectural contribution is a complete failure-attribution dictionary. When something goes wrong in an agent-driven decision, post-mortem can attribute the failure cleanly to one of ten sources:
 
 | Attribution | Owned by | "Failure looked like..." |
 |---|---|---|
@@ -148,6 +148,7 @@ ESF sits in a catalog whose meta-architectural contribution is a complete failur
 | **Bad continuity** | DCS | State or memory lost (or wrongly carried) across sessions and time |
 | **Bad grounding** | GDS | Metric resolved against the wrong canonical definition, or returned past an entitlement boundary |
 | **Bad or missing registry** | ARS | Discovery or governance acting on an agentic asset that was never inventoried |
+| **Bad or unbounded execution** | SRS | First-party agent ran on a runtime that lacked sovereign control over its execution |
 
 Without the catalog, this dictionary doesn't exist and post-mortems devolve into "the AI was wrong." With it, the failure is locatable, ownable, and fixable.
 
@@ -198,7 +199,7 @@ The sources above document INDIVIDUAL implementations and isolated primitives. E
 3. An **8-step build sequence** from skeleton to first reference deployment
 4. **Anti-patterns** to avoid
 5. A **portable, citable specification** under CC BY 4.0: adopt, adapt, build commercial products on top, with attribution
-6. **Explicit composition with the catalog**: the nine-way failure attribution dictionary that the full Spine catalog enables
+6. **Explicit composition with the catalog**: the ten-way failure attribution dictionary that the full Spine catalog enables
 
 If your team is independently converging on this pattern (as Bloomberg, Kafka, Everstream, Resilinc, and others already have at their respective layers), ESF gives you a vocabulary, a checklist, and a published artifact you can hand to your peers.
 
@@ -289,7 +290,7 @@ See [LICENSE](LICENSE) for the summary.
 
 ## Catalog
 
-ESF is one of eight specifications in the same architectural catalog:
+ESF is one of nine specifications in the same architectural catalog:
 
 - **[PDS: Progressive Discovery Spine](https://github.com/drewmattie-code/Progressive-Discovery-Spine)** (public): customer-internal tool / data discovery discipline
 - **[ACS: Adversarial Coordination Spine](https://github.com/drewmattie-code/Adversarial-Coordination-Spine)** (public): multi-agent coordination layer
@@ -299,8 +300,9 @@ ESF is one of eight specifications in the same architectural catalog:
 - **[DCS: Durable Context Spine](https://github.com/drewmattie-code/Durable-Context-Spine)** (public): durable state and memory across sessions and time
 - **GDS: Grounded Data Spine** (private, forthcoming): a canonical semantic model (text-to-metric) plus data-level entitlements
 - **ARS: Agent Registry Spine** (private, forthcoming): the inventory substrate, one system of record for every agentic asset that discovery reads from and governance enforces against
+- **SRS: Sovereign Runtime Spine** (private, forthcoming): the execution substrate, the sovereign first-party agent runtime that first-party agents run on while outside agents and tools plug into the Spine
 
-PDS and ESF are peers; ACS consumes from both. Together with the rest of the catalog they form the nine-way failure attribution dictionary documented above.
+PDS and ESF are peers; ACS consumes from both. Together with the rest of the catalog they form the ten-way failure attribution dictionary documented above.
 
 ## Author
 

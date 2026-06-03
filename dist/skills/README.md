@@ -26,7 +26,7 @@ It will NOT install software, pretend to be a runnable library, or recite the wh
 
 ## Composition with the catalog
 
-ESF is one of eight specifications in the same architectural catalog: PDS, ACS, ESF, AGS, and DCS are public; CRI, GDS, and ARS are private siblings (CRI patent-preservation, GDS and ARS forthcoming). Install the public skills for the full coverage:
+ESF is one of nine specifications in the same architectural catalog: PDS, ACS, ESF, AGS, and DCS are public; CRI, GDS, ARS, and SRS are private siblings (CRI patent-preservation, GDS, ARS, and SRS forthcoming). Install the public skills for the full coverage:
 
 ```bash
 mkdir -p ~/.claude/skills/pds ~/.claude/skills/esf ~/.claude/skills/acs ~/.claude/skills/ags ~/.claude/skills/dcs
