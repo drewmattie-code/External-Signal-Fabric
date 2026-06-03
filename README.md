@@ -6,7 +6,7 @@
 
 [![License: CC BY 4.0](https://img.shields.io/badge/spec-CC_BY_4.0-blue?style=flat-square)](LICENSE-CC-BY-4.0)
 [![License: MIT](https://img.shields.io/badge/code-MIT-green?style=flat-square)](LICENSE-MIT)
-[![Status: v1.0](https://img.shields.io/badge/status-v1.0-0F766E?style=flat-square)](SPEC.md)
+[![Status: v1.1](https://img.shields.io/badge/status-v1.1-0F766E?style=flat-square)](SPEC.md)
 [![Peer: PDS](https://img.shields.io/badge/peer-PDS-0F766E?style=flat-square)](https://github.com/drewmattie-code/Progressive-Discovery-Spine)
 [![Above: ACS](https://img.shields.io/badge/below-ACS-7C3AED?style=flat-square)](https://github.com/drewmattie-code/Adversarial-Coordination-Spine)
 
@@ -133,18 +133,23 @@ PDS answers *"what is true inside this customer's four walls?"* ESF answers *"wh
 
 Full discussion of each principle, with problems, patterns, and implementation notes, lives in [SPEC.md](SPEC.md).
 
-## The four-way failure attribution principle
+## The nine-way failure attribution principle
 
-ESF is the third spec in a catalog whose meta-architectural contribution is a complete failure-attribution dictionary. When something goes wrong in an agent-driven decision, post-mortem can attribute the failure cleanly to one of four sources:
+ESF sits in a catalog whose meta-architectural contribution is a complete failure-attribution dictionary. When something goes wrong in an agent-driven decision, post-mortem can attribute the failure cleanly to one of nine sources:
 
 | Attribution | Owned by | "Failure looked like..." |
 |---|---|---|
-| **Bad customer data** | PDS | Wrong supplier ID returned, stale internal cache, missing record |
+| **Bad customer/tool data** | PDS | Wrong supplier ID returned, stale internal cache, missing record |
 | **Bad world data** | ESF | Expired weather signal, port dwell from old version, mis-tagged geopolitical advisory |
 | **Bad reasoning** | ACS Planner | Granular plan that assumed conditions that no signal supported |
 | **Bad evaluation** | ACS Evaluator | Rubber-stamped output that violated the contract |
+| **Bad scoring** | CRI | Composite risk index that fused the layers into a misleading number |
+| **Bad governance** | AGS | Action taken outside policy, or with an identity that should have been denied |
+| **Bad continuity** | DCS | State or memory lost (or wrongly carried) across sessions and time |
+| **Bad grounding** | GDS | Metric resolved against the wrong canonical definition, or returned past an entitlement boundary |
+| **Bad or missing registry** | ARS | Discovery or governance acting on an agentic asset that was never inventoried |
 
-Without the three-spec catalog, this dictionary doesn't exist and post-mortems devolve into "the AI was wrong." With it, the failure is locatable, ownable, and fixable.
+Without the catalog, this dictionary doesn't exist and post-mortems devolve into "the AI was wrong." With it, the failure is locatable, ownable, and fixable.
 
 ## Industry context: convergence on the same pattern
 
@@ -193,7 +198,7 @@ The sources above document INDIVIDUAL implementations and isolated primitives. E
 3. An **8-step build sequence** from skeleton to first reference deployment
 4. **Anti-patterns** to avoid
 5. A **portable, citable specification** under CC BY 4.0: adopt, adapt, build commercial products on top, with attribution
-6. **Explicit composition with PDS and ACS**: the four-way failure attribution dictionary that the three-spec catalog enables
+6. **Explicit composition with the catalog**: the nine-way failure attribution dictionary that the full Spine catalog enables
 
 If your team is independently converging on this pattern (as Bloomberg, Kafka, Everstream, Resilinc, and others already have at their respective layers), ESF gives you a vocabulary, a checklist, and a published artifact you can hand to your peers.
 
@@ -284,13 +289,18 @@ See [LICENSE](LICENSE) for the summary.
 
 ## Catalog
 
-ESF is one of three specifications in the same architectural catalog:
+ESF is one of eight specifications in the same architectural catalog:
 
-- **[PDS: Progressive Discovery Spine](https://github.com/drewmattie-code/Progressive-Discovery-Spine)**: customer-internal tool / data discipline
-- **ESF: External Signal Fabric** *(this spec)*: customer-external signal fabric
-- **[ACS: Adversarial Coordination Spine](https://github.com/drewmattie-code/Adversarial-Coordination-Spine)**: multi-agent coordination layer
+- **[PDS: Progressive Discovery Spine](https://github.com/drewmattie-code/Progressive-Discovery-Spine)** (public): customer-internal tool / data discovery discipline
+- **[ACS: Adversarial Coordination Spine](https://github.com/drewmattie-code/Adversarial-Coordination-Spine)** (public): multi-agent coordination layer
+- **ESF: External Signal Fabric** *(this spec, public)*: customer-external signal fabric
+- **CRI: Composite Risk Index** (private, patent-preservation): composite, cross-layer risk scoring
+- **[AGS: Agent Governance Spine](https://github.com/drewmattie-code/Agent-Governance-Spine)** (public): deterministic governance, per-agent identity, tamper-evident audit
+- **[DCS: Durable Context Spine](https://github.com/drewmattie-code/Durable-Context-Spine)** (public): durable state and memory across sessions and time
+- **GDS: Grounded Data Spine** (private, forthcoming): a canonical semantic model (text-to-metric) plus data-level entitlements
+- **ARS: Agent Registry Spine** (private, forthcoming): the inventory substrate, one system of record for every agentic asset that discovery reads from and governance enforces against
 
-PDS and ESF are peers; ACS consumes from both. Together they form the four-way failure attribution dictionary documented above.
+PDS and ESF are peers; ACS consumes from both. Together with the rest of the catalog they form the nine-way failure attribution dictionary documented above.
 
 ## Author
 

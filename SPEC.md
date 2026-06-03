@@ -1,6 +1,6 @@
 # External Signal Fabric: Specification
 
-> **Status:** v1.0 · Drew Mattie · 2026-05-28
+> **Status:** v1.1 · Drew Mattie · 2026-06-02
 > **License:** [CC BY 4.0](LICENSE-CC-BY-4.0)
 
 This is the full technical specification for the External Signal Fabric pattern. The [README](README.md) is the elevator pitch; this document is the build reference.
@@ -325,25 +325,35 @@ ESF is compatible with, and built on top of, these standards:
 - **W3C PROV**: Provenance vocabulary for signal-version attribution
 - **OpenTelemetry**: Distributed tracing across adapter → bus → fusion → consumer
 
-ESF is also compatible with the companion specifications in the catalog:
+ESF is also compatible with the companion specifications in the catalog (eight in total):
 
-- **PDS (Progressive Discovery Spine)**: ESF is a peer to PDS, not a substitute. PDS resolves customer-internal state; ESF resolves external-world state. Both feed ACS.
-- **ACS (Adversarial Coordination Spine)**: ACS consumes from ESF via subscriptions; the ACS evaluator enforces ESF's freshness and degradation contracts at the commitment boundary.
+- **PDS (Progressive Discovery Spine)** (public): ESF is a peer to PDS, not a substitute. PDS resolves customer-internal tool / data state; ESF resolves external-world state. Both feed ACS.
+- **ACS (Adversarial Coordination Spine)** (public): ACS consumes from ESF via subscriptions; the ACS evaluator enforces ESF's freshness and degradation contracts at the commitment boundary.
+- **CRI (Composite Risk Index)** (private, patent-preservation): composite, cross-layer risk scoring.
+- **AGS (Agent Governance Spine)** (public): deterministic governance, per-agent identity, and tamper-evident audit.
+- **DCS (Durable Context Spine)** (public): durable state and memory across sessions and time.
+- **GDS (Grounded Data Spine)** (private, forthcoming): a canonical semantic model (text-to-metric) plus data-level entitlements.
+- **ARS (Agent Registry Spine)** (private, forthcoming): the inventory substrate, one system of record for every agentic asset that discovery reads from and governance enforces against.
 
 ---
 
-## 8. The four-way failure attribution principle
+## 8. The nine-way failure attribution principle
 
-ESF is the third spec in a catalog whose meta-architectural contribution is a complete failure-attribution dictionary. When an agent-driven decision goes wrong, post-mortem can attribute the failure cleanly to one of four sources:
+ESF sits in a catalog whose meta-architectural contribution is a complete failure-attribution dictionary. When an agent-driven decision goes wrong, post-mortem can attribute the failure cleanly to one of nine sources:
 
 | Attribution | Spec layer that owns it | "Failure looked like..." |
 |---|---|---|
-| Bad customer data | PDS | Wrong supplier ID returned, stale internal cache, missing record |
+| Bad customer/tool data | PDS | Wrong supplier ID returned, stale internal cache, missing record |
 | Bad world data | ESF | Expired signal used, mis-tagged advisory, broken adapter |
 | Bad reasoning | ACS Planner | Granular plan that assumed conditions that no signal supported |
 | Bad evaluation | ACS Evaluator | Rubber-stamped output that violated the negotiated contract |
+| Bad scoring | CRI | Composite risk index that fused the layers into a misleading number |
+| Bad governance | AGS | Action taken outside policy, or with an identity that should have been denied |
+| Bad continuity | DCS | State or memory lost (or wrongly carried) across sessions and time |
+| Bad grounding | GDS | Metric resolved against the wrong canonical definition, or returned past an entitlement boundary |
+| Bad or missing registry | ARS | Discovery or governance acting on an agentic asset that was never inventoried |
 
-This dictionary is what the three-spec catalog enables and what no single spec produces alone. Build, measure, and own each attribution surface separately.
+This dictionary is what the full catalog enables and what no single spec produces alone. Build, measure, and own each attribution surface separately.
 
 ---
 
@@ -378,8 +388,13 @@ This dictionary is what the three-spec catalog enables and what no single spec p
 
 ### Catalog peers
 
-- Progressive Discovery Spine: [github.com/drewmattie-code/Progressive-Discovery-Spine](https://github.com/drewmattie-code/Progressive-Discovery-Spine)
-- Adversarial Coordination Spine: [github.com/drewmattie-code/Adversarial-Coordination-Spine](https://github.com/drewmattie-code/Adversarial-Coordination-Spine)
+- Progressive Discovery Spine (public): [github.com/drewmattie-code/Progressive-Discovery-Spine](https://github.com/drewmattie-code/Progressive-Discovery-Spine)
+- Adversarial Coordination Spine (public): [github.com/drewmattie-code/Adversarial-Coordination-Spine](https://github.com/drewmattie-code/Adversarial-Coordination-Spine)
+- Agent Governance Spine (public): [github.com/drewmattie-code/Agent-Governance-Spine](https://github.com/drewmattie-code/Agent-Governance-Spine)
+- Durable Context Spine (public): [github.com/drewmattie-code/Durable-Context-Spine](https://github.com/drewmattie-code/Durable-Context-Spine)
+- Composite Risk Index (private, patent-preservation): composite, cross-layer risk scoring
+- Grounded Data Spine (private, forthcoming): a canonical semantic model (text-to-metric) plus data-level entitlements
+- Agent Registry Spine (private, forthcoming): the inventory substrate, one system of record for every agentic asset that discovery reads from and governance enforces against
 
 ---
 
@@ -389,6 +404,7 @@ This specification follows semantic versioning. Breaking changes to the conceptu
 
 - **v0.1-draft**: initial draft (2026-05-25). Internal review.
 - **v1.0**: first public release under CC BY 4.0 + MIT (2026-05-28).
+- **v1.1**: catalog expanded to eight specs, attribution to nine-way (2026-06-02). Names CRI, GDS, and ARS as private siblings.
 
 ---
 
@@ -396,4 +412,4 @@ This specification follows semantic versioning. Breaking changes to the conceptu
 
 [Drew Mattie](https://www.linkedin.com/in/drew-mattie-88084826/) · SaaSquach AI Labs (a division of Charles & Roe Inc.) · 2026
 
-ESF was developed at SaaSquach AI Labs (a division of Charles & Roe Inc.) as the third specification in the agent-architecture catalog alongside PDS and ACS. This specification is released as open documentation under [CC BY 4.0](LICENSE-CC-BY-4.0) so the pattern can be adopted, adapted, and built upon, with attribution.
+ESF was developed at SaaSquach AI Labs (a division of Charles & Roe Inc.) as one specification in the broader agent-architecture catalog alongside PDS, ACS, AGS, DCS, and the private siblings CRI, GDS, and ARS. This specification is released as open documentation under [CC BY 4.0](LICENSE-CC-BY-4.0) so the pattern can be adopted, adapted, and built upon, with attribution.

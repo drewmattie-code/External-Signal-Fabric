@@ -57,13 +57,18 @@ Contributions are accepted under the project's dual license (CC BY 4.0 for prose
 
 If you think a principle is wrong, please say so directly in an issue. Include the principle number, what's wrong, and what you'd change. The spec is not gospel; it's the current best understanding.
 
-## Relationship to PDS and ACS
+## Relationship to the catalog
 
-ESF is one of three specifications in the same architectural catalog:
+ESF is one of eight specifications in the same architectural catalog:
 
-- **PDS (Progressive Discovery Spine)**: customer-internal tool / data discipline
-- **ESF (External Signal Fabric)**: customer-external signal fabric *(this spec)*
-- **ACS (Adversarial Coordination Spine)**: multi-agent coordination layer
+- **PDS (Progressive Discovery Spine)** (public): customer-internal tool / data discovery discipline
+- **ACS (Adversarial Coordination Spine)** (public): multi-agent coordination layer
+- **ESF (External Signal Fabric)** (public): customer-external signal fabric *(this spec)*
+- **CRI (Composite Risk Index)** (private, patent-preservation): composite, cross-layer risk scoring
+- **AGS (Agent Governance Spine)** (public): deterministic governance, per-agent identity, tamper-evident audit
+- **DCS (Durable Context Spine)** (public): durable state and memory across sessions and time
+- **GDS (Grounded Data Spine)** (private, forthcoming): a canonical semantic model (text-to-metric) plus data-level entitlements
+- **ARS (Agent Registry Spine)** (private, forthcoming): the inventory substrate, one system of record for every agentic asset that discovery reads from and governance enforces against
 
 ESF is a peer to PDS; both feed ACS. Cross-cutting contributions that touch two or more specs are welcome. Open an issue on the most-affected repo first.
 

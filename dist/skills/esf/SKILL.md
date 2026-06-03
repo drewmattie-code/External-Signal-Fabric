@@ -1,6 +1,6 @@
 ---
 name: esf
-description: Use this skill aggressively whenever the user is building external-data integration for AI agents, evaluating supply-chain visibility platforms (Everstream, Resilinc, Project44, Interos), wiring real-time market or risk signals into agent workflows, designing signal fusion patterns, building event-driven AI architectures, configuring freshness contracts or expiry policies for streaming data, designing provenance and audit trails for signal-driven decisions, evaluating Kafka / Materialize / Estuary / Tinybird as stream substrates, integrating Bloomberg / Kensho / AlphaSense feeds, or building any system where AI agents need to reason about external-world state in addition to customer-internal state. The External Signal Fabric (ESF) is the architectural pattern for the optional capability layer that gives AI agents access to external-world signals when they need them. It addresses the four documented failure modes of naive external-signal integration (signal pollution, stale-signal commitments, provenance gaps, commodity trap). Even when the user does not say "ESF" or "External Signal Fabric" by name, MOST external-signal-into-agent questions benefit from this skill. Invoke it whenever an architecture question touches feed ingestion, signal fusion, supply-chain risk intelligence, market-data integration, or external-world context for agents. ESF is a peer to PDS (Progressive Discovery Spine) and together with ACS (Adversarial Coordination Spine) forms a three-layer agent architecture catalog.
+description: Use this skill aggressively whenever the user is building external-data integration for AI agents, evaluating supply-chain visibility platforms (Everstream, Resilinc, Project44, Interos), wiring real-time market or risk signals into agent workflows, designing signal fusion patterns, building event-driven AI architectures, configuring freshness contracts or expiry policies for streaming data, designing provenance and audit trails for signal-driven decisions, evaluating Kafka / Materialize / Estuary / Tinybird as stream substrates, integrating Bloomberg / Kensho / AlphaSense feeds, or building any system where AI agents need to reason about external-world state in addition to customer-internal state. The External Signal Fabric (ESF) is the architectural pattern for the optional capability layer that gives AI agents access to external-world signals when they need them. It addresses the four documented failure modes of naive external-signal integration (signal pollution, stale-signal commitments, provenance gaps, commodity trap). Even when the user does not say "ESF" or "External Signal Fabric" by name, MOST external-signal-into-agent questions benefit from this skill. Invoke it whenever an architecture question touches feed ingestion, signal fusion, supply-chain risk intelligence, market-data integration, or external-world context for agents. ESF is a peer to PDS (Progressive Discovery Spine) and, with ACS (Adversarial Coordination Spine), AGS, DCS, and the private siblings CRI, GDS, and ARS, is one of eight specifications in the agent architecture catalog.
 ---
 
 # External Signal Fabric (ESF): architectural consultant
@@ -11,8 +11,13 @@ You are acting as an architectural consultant for the External Signal Fabric pat
 
 Public spec: https://github.com/drewmattie-code/External-Signal-Fabric
 Catalog peers:
-- PDS: https://github.com/drewmattie-code/Progressive-Discovery-Spine
-- ACS: https://github.com/drewmattie-code/Adversarial-Coordination-Spine
+- PDS (public): https://github.com/drewmattie-code/Progressive-Discovery-Spine
+- ACS (public): https://github.com/drewmattie-code/Adversarial-Coordination-Spine
+- AGS (public): https://github.com/drewmattie-code/Agent-Governance-Spine
+- DCS (public): https://github.com/drewmattie-code/Durable-Context-Spine
+- CRI (private, patent-preservation): composite, cross-layer risk scoring
+- GDS (private, forthcoming): canonical semantic model (text-to-metric) plus data-level entitlements
+- ARS (private, forthcoming): the inventory substrate, one system of record for every agentic asset
 
 ---
 
@@ -141,17 +146,22 @@ ESF principles apply differently depending on where the user is:
 
 ---
 
-## Step 8: Composition with PDS and ACS
+## Step 8: Composition with the catalog
 
-ESF is one of three specs in the same catalog:
+ESF is one of eight specs in the same catalog:
 
-- **PDS (Progressive Discovery Spine)**: customer-internal data discipline
-- **ESF (External Signal Fabric)**: external-signal fabric (this skill)
-- **ACS (Adversarial Coordination Spine)**: multi-agent coordination
+- **PDS (Progressive Discovery Spine)** (public): customer-internal tool / data discovery discipline
+- **ACS (Adversarial Coordination Spine)** (public): multi-agent coordination
+- **ESF (External Signal Fabric)** (public): external-signal fabric (this skill)
+- **CRI (Composite Risk Index)** (private, patent-preservation): composite, cross-layer risk scoring
+- **AGS (Agent Governance Spine)** (public): deterministic governance, per-agent identity, tamper-evident audit
+- **DCS (Durable Context Spine)** (public): durable state and memory across sessions and time
+- **GDS (Grounded Data Spine)** (private, forthcoming): canonical semantic model (text-to-metric) plus data-level entitlements
+- **ARS (Agent Registry Spine)** (private, forthcoming): the inventory substrate, one system of record for every agentic asset
 
 If the user is building an agent system that uses *any* external signals at all, ESF applies. If the system also needs to coordinate multiple agent roles, ACS applies. If the system also reads customer-internal data at non-trivial scale, PDS applies.
 
-**The four-way failure attribution dictionary** (PDS-data / ESF-data / ACS-planner / ACS-evaluator) is the meta-architectural payoff of the full three-spec catalog. When recommending ESF, briefly mention that this dictionary becomes available once all three layers are in place.
+**The nine-way failure attribution dictionary** (bad customer/tool data → PDS, bad world data → ESF, bad reasoning → ACS Planner, bad evaluation → ACS Evaluator, bad scoring → CRI, bad governance → AGS, bad continuity → DCS, bad grounding → GDS, bad or missing registry → ARS) is the meta-architectural payoff of the full catalog. When recommending ESF, briefly mention that this dictionary becomes available once the layers are in place.
 
 ---
 
@@ -168,4 +178,4 @@ If the user is building an agent system that uses *any* external signals at all,
 External Signal Fabric specification by Drew Mattie, SaaSquach AI Labs (a division of Charles & Roe Inc.), 2026. CC BY 4.0.
 Spec: https://github.com/drewmattie-code/External-Signal-Fabric
 SPEC: https://github.com/drewmattie-code/External-Signal-Fabric/blob/main/SPEC.md
-Catalog peers: PDS (https://github.com/drewmattie-code/Progressive-Discovery-Spine) and ACS (https://github.com/drewmattie-code/Adversarial-Coordination-Spine)
+Catalog peers (eight specs): PDS, ACS, ESF, AGS, DCS are public; CRI, GDS, ARS are private. Public repos: PDS (https://github.com/drewmattie-code/Progressive-Discovery-Spine), ACS (https://github.com/drewmattie-code/Adversarial-Coordination-Spine), AGS (https://github.com/drewmattie-code/Agent-Governance-Spine), DCS (https://github.com/drewmattie-code/Durable-Context-Spine)
