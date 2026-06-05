@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/drewmattie-code/External-Signal-Fabric/schema/signal-envelope.v1.json",
+  "title": "ESF Signal Envelope",
+  "description": "A typed external signal flowing through the External Signal Fabric. CloudEvents 1.0 core fields plus ESF extensions that make the signal auditable and safe to reason over: provenance (source), confidence, version, a freshness window, and the entity the signal is about. Formalizes the ESF provenance, schema, and freshness contract.",
+  "type": "object",
+  "required": ["specversion", "id", "source", "type", "time", "data", "confidence", "signalversion", "freshnessseconds", "entity"],
+  "additionalProperties": true,
+  "properties": {
+    "specversion": {"type": "string", "enum": ["1.0"]},
+    "id": {"type": "string", "description": "CloudEvents id: unique per signal occurrence."},
+    "source": {"type": "string", "description": "CloudEvents source: the originating feed or system. The provenance root."},
+    "type": {"type": "string", "description": "Reverse-DNS event type, e.g. ai.spine.esf.commodity.price."},
+    "time": {"type": "string", "description": "Event time, RFC3339 (e.g. 2026-06-05T12:00:00Z)."},
+    "data": {"type": "object", "description": "The signal payload."},
+    "confidence": {"type": "number", "description": "ESF extension: source confidence in the range 0 to 1, propagated into downstream reasoning so nothing consumes a low-confidence signal blindly."},
+    "signalversion": {"type": "string", "description": "ESF extension: the checkpointed version of this signal, so a past decision is reproducible against the exact signal it used."},
+    "freshnessseconds": {"type": "integer", "description": "ESF extension: how long after time this signal stays valid. Past it the signal is stale and must not back a commitment."},
+    "entity": {"type": "string", "description": "ESF extension: the entity this signal is about, used to reconcile conflicting signals for the same thing."}
+  }
+}

@@ -270,6 +270,9 @@ The [`examples/`](examples/) directory has concrete artifacts:
 - [`signal-manifest.example.json`](examples/signal-manifest.example.json): what a typed signal with provenance + freshness metadata looks like
 - [`fusion-protocols.md`](examples/fusion-protocols.md): the two bidirectional fusion patterns (PDS-anchored, ESF-anchored) worked end-to-end
 - [`evaluator-rejection-on-expired-signal.md`](examples/evaluator-rejection-on-expired-signal.md): what enforcement of the three-state freshness contract looks like in the ACS evaluator
+- [`fabric.py`](examples/fabric.py): a runnable, dependency-free demo of the fabric. It ingests typed signals, validates them, fires a staleness alarm on an expired signal and refuses it for decisions, reconciles two conflicting signals for the same entity by confidence, and prints a fused output with its provenance trail. Run it with `python3 examples/fabric.py`.
+
+The formal signal contract lives in [`schema/signal-envelope.v1.json`](schema/signal-envelope.v1.json): CloudEvents 1.0 plus the ESF provenance, confidence, version, and freshness extensions.
 
 ## Citing this work
 
