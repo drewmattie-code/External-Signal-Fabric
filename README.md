@@ -7,6 +7,9 @@
 [![License: CC BY 4.0](https://img.shields.io/badge/spec-CC_BY_4.0-blue?style=flat-square)](LICENSE-CC-BY-4.0)
 [![License: MIT](https://img.shields.io/badge/code-MIT-green?style=flat-square)](LICENSE-MIT)
 [![Status: v1.1](https://img.shields.io/badge/status-v1.1-0F766E?style=flat-square)](SPEC.md)
+[![spec checks](https://github.com/drewmattie-code/External-Signal-Fabric/actions/workflows/spec-checks.yml/badge.svg)](https://github.com/drewmattie-code/External-Signal-Fabric/actions/workflows/spec-checks.yml)
+
+> **Reference implementation:** a public TypeScript implementation of the ESF adapter surface (typed signals, freshness states, provenance stamping) lives at [esf-reference-adapters](https://github.com/drewmattie-code/esf-reference-adapters).
 [![Peer: PDS](https://img.shields.io/badge/peer-PDS-0F766E?style=flat-square)](https://github.com/drewmattie-code/Progressive-Discovery-Spine)
 [![Above: ACS](https://img.shields.io/badge/below-ACS-7C3AED?style=flat-square)](https://github.com/drewmattie-code/Adversarial-Coordination-Spine)
 
@@ -306,6 +309,8 @@ ESF is one of nine specifications in the same architectural catalog:
 - **SRS: Sovereign Runtime Spine** (private, forthcoming): the execution substrate, the sovereign first-party agent runtime that first-party agents run on while outside agents and tools plug into the Spine
 
 PDS and ESF are peers; ACS consumes from both. Together with the rest of the catalog they form the ten-way failure attribution dictionary documented above.
+
+**The two tiers, and the two doors.** The nine layers group into two tiers: a **foundation tier** (DCS · GDS · ARS · SRS — the substrates: continuity, grounding, the system of record, execution) and a **capability tier** (PDS · ACS · ESF · CRI · AGS — the capabilities: discovery, coordination, world signals, scoring, governance). And there are exactly two ways anything reaches an agent estate; the catalog governs both. **Door 1: outside applications plug INTO the Spine** — any third-party agent, tool, or AI application connects through governed boundaries: discovered through one curated surface (PDS), every action policy-gated and audited (AGS), the data grounded and entitlement-scoped (GDS), tracked in one system of record (ARS). **Door 2: first-party agents run ON the Spine** — on the sovereign runtime (SRS) that composes the whole catalog, identity-bound, isolated, and bounded by construction. The rendered map lives at [saasquach.ai/spine](https://saasquach.ai/spine).
 
 ## Author
 
