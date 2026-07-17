@@ -1,9 +1,36 @@
 # External Signal Fabric: Specification
 
-> **Status:** v1.1 · Drew Mattie · 2026-06-02
+> **Status:** v1.2 · Drew Mattie · 2026-07-17
 > **License:** [CC BY 4.0](LICENSE-CC-BY-4.0)
 
 This is the full technical specification for the External Signal Fabric pattern. The [README](README.md) is the elevator pitch; this document is the build reference.
+
+---
+
+## Conformance
+
+The key words MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY in this document are to be interpreted as described in BCP 14 ([RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), [RFC 8174](https://www.rfc-editor.org/rfc/rfc8174)) when, and only when, they appear in all capitals.
+
+This specification separates three tiers of guidance, and only the first confers conformance:
+
+1. **Required behaviour** — the numbered requirements below (ESF-R1 …). An implementation is ESF-conformant when it satisfies every MUST-level requirement.
+2. **Recommended implementation** — the patterns the principle discussions describe (SHOULD level). Departures are legitimate with documented rationale.
+3. **Illustrative technology** — named products and projects throughout this document (Kafka, Flink, CloudEvents, Redis Streams, commercial signal vendors) are examples only. Deploying a named component does not by itself make a layer conformant, and no requirement below depends on any specific vendor.
+
+### Normative requirements
+
+| ID | Requirement |
+|---|---|
+| ESF-R1 | External signals MUST enter the fabric as typed, structured payloads — never as untyped prose pasted into prompts. |
+| ESF-R2 | The fabric MUST be lateral: any authorized consumer MAY subscribe to any signal class; consumption MUST NOT require a hardcoded sequential pipeline. |
+| ESF-R3 | Every signal MUST carry source, timestamp, and confidence. |
+| ESF-R4 | Distribution MUST be subscription-based; polling MUST NOT be the primary mechanism. |
+| ESF-R5 | Every signal MUST carry an explicit freshness state (fresh / stale / expired), and a decision MUST NOT silently consume an expired signal. |
+| ESF-R6 | Fusion triggers MAY run bidirectionally (internal fact → external enrichment, external event → internal lookup). |
+| ESF-R7 | Latency budgets MUST be declared per signal tier. |
+| ESF-R8 | Fusion outputs MUST be tenant-scoped even where raw signals are shared. |
+| ESF-R9 | Every fusion MUST declare its degradation behaviour for each unavailable input. |
+| ESF-R10 | Audit records MUST reference exact signal version IDs, not signal classes. |
 
 ---
 
@@ -408,6 +435,7 @@ This specification follows semantic versioning. Breaking changes to the conceptu
 - **v0.1-draft**: initial draft (2026-05-25). Internal review.
 - **v1.0**: first public release under CC BY 4.0 + MIT (2026-05-28).
 - **v1.1**: catalog expanded to nine specs, attribution to ten-way (2026-06-02). Names CRI, GDS, ARS, and SRS as private siblings.
+- **v1.2:** (2026-07-17). Adds the Conformance section — BCP 14 keywords, the required / recommended / illustrative three-tier separation, and numbered normative requirements ESF-R1–R10. Prompted in part by an external CIO architecture review (2026-07-17). No changes to the ten principles.
 
 ---
 
