@@ -395,7 +395,7 @@ This dictionary is what the full catalog enables and what no single spec produce
 - CloudEvents (CNCF), *Spec home* ([cloudevents.io](https://cloudevents.io/))
 - Materialize, *Up-to-the-second context* ([materialize.com](https://materialize.com/))
 - Estuary Flow, *Right-time data platform* ([estuary.dev](https://estuary.dev/))
-- Tinybird, *Get started: concepts* ([tinybird.co](https://www.tinybird.co/docs/get-started/concepts))
+- Tinybird, *Get started: concepts* ([tinybird.co](https://www.tinybird.co/docs/classic/get-started/concepts))
 
 ### Financial signal fusion
 
