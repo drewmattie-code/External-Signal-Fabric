@@ -114,7 +114,7 @@ def reconcile(signals):
     for entity, group in by_entity.items():
         if len(group) > 1:
             conflicts.append(entity)
-        winner = sorted(group, key=lambda s: (-s["confidence"], -age_seconds(s)))[0]
+        winner = sorted(group, key=lambda s: (-s["confidence"], age_seconds(s)))[0]
         chosen[entity] = winner
     return chosen, conflicts
 
